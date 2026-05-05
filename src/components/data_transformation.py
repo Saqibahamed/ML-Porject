@@ -81,6 +81,8 @@ class DataTransformation:
             input_feature_train_arr = preprocessing_obj.fit_transform(input_feature_train_df)
             input_feature_test_arr = preprocessing_obj.transform(input_feature_test_df)
 
+            logging.info("Preprocessing completed")
+
             train_arr =  np.c_[
                 (input_feature_train_arr),
                 (target_feature_train_df)
@@ -91,9 +93,11 @@ class DataTransformation:
                 (input_feature_test_arr),
                 (target_feature_test_df)
             ]
-            
+
 
             save_file(self.data_transformation_config.preprocessing_obj_data_path,preprocessing_obj)
+
+            logging.info("saved preprocessor.pkl file")
 
             return(
                 train_arr,
@@ -101,14 +105,9 @@ class DataTransformation:
                 self.data_transformation_config.preprocessing_obj_data_path
 
             )
+        
+            
 
         
         except Exception as e:
             raise CustomException(e,sys)
-
-
-
-
-
-
-
